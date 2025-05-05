@@ -2,8 +2,8 @@ services:
   roundcubemail:
     build: .
     volumes:
-      - ./var/roundcube/db/sqlite:/var/roundcube/db
-      - ./var/roundcube/config/config.inc.php:/var/www/html/config/config.inc.php
+      - /var/roundcube/db/sqlite:/var/roundcube/db
+      - /var/roundcube/config/config.inc.php:/var/www/html/config/config.inc.php
     environment:
       ROUNDCUBEMAIL_DB_TYPE: sqlite
       ROUNDCUBEMAIL_SKIN: elastic
