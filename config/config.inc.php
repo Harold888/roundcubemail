@@ -25,7 +25,7 @@ $config = [];
 // Proveedores soportados actualmente: mysql, pgsql, sqlite
 // Para SQLite usa una ruta absoluta (Linux): 'sqlite:////ruta/completa/a/sqlite.db?mode=0646'
 // o en Windows: 'sqlite:///C:/ruta/completa/a/sqlite.db'
-$config['db_dsnw'] = 'mysql://roundcube:pass@localhost/roundcubemail';
+$config['db_dsnw'] = 'mysql://roundcube:RecruitXpress77@db/roundcubemail';
 
 // Servidor IMAP que se utilizará para iniciar sesión
 // Consulta defaults.inc.php para la descripción de la opción
