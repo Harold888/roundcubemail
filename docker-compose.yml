@@ -1,12 +1,11 @@
 version: '3'
-
 services:
   roundcubemail:
     build: .
-    env_file:
-      - .env
+    volumes:
+      - ./var/roundcube/db/sqlite:/var/roundcube/db  # Solo para SQLite
     environment:
-      ROUNDCUBEMAIL_DB_TYPE: mysql
+      ROUNDCUBEMAIL_DB_TYPE: sqlite
       ROUNDCUBEMAIL_SKIN: elastic
       ROUNDCUBEMAIL_DEFAULT_HOST: tls://mail.proyeccionlaboral.com
       ROUNDCUBEMAIL_SMTP_SERVER: tls://mail.proyeccionlaboral.com
@@ -16,23 +15,6 @@ services:
       - "traefik.http.routers.roundcube.entrypoints=websecure"
       - "traefik.http.routers.roundcube.tls.certresolver=myresolver"
       - "traefik.http.services.roundcube.loadbalancer.server.port=80"
-    depends_on:
-      - db
-    networks:
-      - dokploy-network
-
-  db:
-    image: mariadb:10.5
-    restart: always
-    env_file:
-      - .env
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
-      MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASS}
-    volumes:
-      - ./var/roundcube/db/mysql:/var/lib/mysql
     networks:
       - dokploy-network
 
