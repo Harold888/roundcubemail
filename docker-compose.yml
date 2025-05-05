@@ -1,11 +1,8 @@
-version: '3'
 services:
   roundcubemail:
-    image: roundcube/roundcubemail:1.6.9-apache
+    build: .
     volumes:
-      - ./var/roundcube/www:/var/www/html
       - ./var/roundcube/db/sqlite:/var/roundcube/db
-      - ./var/roundcube/custom-php.ini:/usr/local/etc/php/conf.d/custom-php.ini  # Solo una vez
       - ./var/roundcube/plugins:/var/roundcube/plugins
       - ./var/roundcube/config:/var/roundcube/config
     environment:
