@@ -1,0 +1,27 @@
+version: '3'
+services:
+  roundcubemail:
+    image: roundcube/roundcubemail:1.6.9-apache
+    volumes:
+      - ./var/roundcube/www:/var/www/html
+      - ./var/roundcube/db/sqlite:/var/roundcube/db
+      - ./var/roundcube/custom-php.ini:/usr/local/etc/php/conf.d/custom-php.ini  # Solo una vez
+      - ./var/roundcube/plugins:/var/roundcube/plugins
+      - ./var/roundcube/config:/var/roundcube/config
+    environment:
+      ROUNDCUBEMAIL_DB_TYPE: sqlite
+      ROUNDCUBEMAIL_SKIN: elastic
+      ROUNDCUBEMAIL_DEFAULT_HOST: tls://mail.proyeccionlaboral.com
+      ROUNDCUBEMAIL_SMTP_SERVER: tls://mail.proyeccionlaboral.com
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.roundcube.rule=Host(`webmail.proyeccionlaboral.com`)"
+      - "traefik.http.routers.roundcube.entrypoints=websecure"
+      - "traefik.http.routers.roundcube.tls.certresolver=myresolver"
+      - "traefik.http.services.roundcube.loadbalancer.server.port=80"
+    networks:
+      - dokploy-network
+
+networks:
+  dokploy-network:
+    external: true
