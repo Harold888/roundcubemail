@@ -4,6 +4,9 @@ services:
     volumes:
       - ./var/roundcube/db/sqlite:/var/roundcube/db
       - ./var/roundcube/config:/config
+      - ./plugins:/var/www/html/plugins
+      - ./skins:/var/www/html/skins
+      - ./program:/var/www/html/program
     environment:
       ROUNDCUBEMAIL_DB_TYPE: sqlite
       ROUNDCUBEMAIL_SKIN: elastic
