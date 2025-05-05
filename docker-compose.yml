@@ -1,9 +1,8 @@
-version: '3'
 services:
   roundcubemail:
     build: .
     volumes:
-      - ./var/roundcube/db/sqlite:/var/roundcube/db  # Solo para SQLite
+      - ./var/roundcube/db/sqlite:/var/roundcube/db
     environment:
       ROUNDCUBEMAIL_DB_TYPE: sqlite
       ROUNDCUBEMAIL_SKIN: elastic
